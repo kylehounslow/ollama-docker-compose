@@ -1,6 +1,6 @@
 # docker-compose-ollama
 
-Run [Ollama](https://ollama.ai/) locally using Docker Compose with an optional [Open WebUI](https://github.com/open-webui/open-webui) interface. The llama3.2 model is automatically pulled during the Docker build.
+Run [Ollama](https://ollama.ai/) locally using Docker Compose with an [Open WebUI](https://github.com/open-webui/open-webui) interface. The llama3.2 model is automatically pulled during the Docker build.
 
 ```mermaid
 graph LR
@@ -8,8 +8,8 @@ graph LR
     A --> C[Python Client]
     B --> D[Ollama Server<br/>:11434]
     C --> D
-    D --> E[LLM<br/>llama3.2]
-    C -.-> F[OTel Collector<br/>optional]
+    D --> E["LLM<br/>(llama3.2)"]
+    C -.-> F["OTel Collector<br/>(optional)"]
 ```
 
 ## Quickstart
