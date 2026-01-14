@@ -1,4 +1,3 @@
-version: '3.8'
 services:
   ollama:
     image: ollama/ollama:latest
@@ -7,8 +6,6 @@ services:
       - "11434:11434"
     volumes:
       - ./ollama_data:/root/.ollama
-    profiles:
-      - ollama-only
     restart: unless-stopped
 
   open-webui:
@@ -18,10 +15,15 @@ services:
       - "${WEBUI_PORT}:8080"
     environment:
       - OLLAMA_BASE_URL=http://ollama:11434
+      - ENABLE_OTEL=${WEBUI_ENABLE_OTEL}
+      - ENABLE_OTEL_TRACES=${WEBUI_ENABLE_OTEL_TRACES}
+      - ENABLE_OTEL_METRICS=${WEBUI_ENABLE_OTEL_METRICS}
+      - OTEL_EXPORTER_OTLP_INSECURE=${OTEL_EXPORTER_OTLP_INSECURE}
+      - OTEL_EXPORTER_OTLP_PROTOCOL=${OTEL_EXPORTER_OTLP_PROTOCOL}
+      - OTEL_EXPORTER_OTLP_ENDPOINT=${OTEL_EXPORTER_OTLP_ENDPOINT_DOCKER}
+      - OTEL_SERVICE_NAME=${WEBUI_OTEL_SERVICE_NAME}
     volumes:
       - ./open-webui_data:/app/backend/data
     depends_on:
       - ollama
-    profiles:
-      - webui
     restart: unless-stopped

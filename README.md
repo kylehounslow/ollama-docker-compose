@@ -18,19 +18,11 @@ graph LR
 docker compose up -d
 ```
 
-By default, `.env` sets `COMPOSE_PROFILES=ollama-only,webui` to run both services:
+This starts both services:
 - Open WebUI: `http://localhost:8080`
 - Ollama API: `http://localhost:11434`
 
-### Ollama Only
-
-To run without the web interface, edit `.env`:
-
-```
-COMPOSE_PROFILES=ollama-only
-```
-
-Then interact via CLI:
+To interact via CLI:
 
 ```bash
 docker exec -it ollama ollama run llama3.2

@@ -1,7 +1,21 @@
-from opentelemetry.instrumentation.ollama import OllamaInstrumentor
+from dotenv import load_dotenv
+load_dotenv()
+
+import os
+from opentelemetry import trace
+from opentelemetry.sdk.trace import TracerProvider
+from opentelemetry.sdk.trace.export import BatchSpanProcessor
+from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
+from opentelemetry.instrumentation.openai import OpenAIInstrumentor
 from openai import OpenAI
 
-OllamaInstrumentor().instrument()
+# Configure OTel
+endpoint = os.getenv("OTEL_EXPORTER_OTLP_ENDPOINT", "http://localhost:4317")
+provider = TracerProvider()
+provider.add_span_processor(BatchSpanProcessor(OTLPSpanExporter(endpoint=endpoint, insecure=True)))
+trace.set_tracer_provider(provider)
+
+OpenAIInstrumentor().instrument()
 
 client = OpenAI(
     base_url="http://localhost:11434/v1",
@@ -17,3 +31,6 @@ response = client.chat.completions.create(
 )
 
 print(response.choices[0].message.content)
+
+# Ensure spans are exported before exit
+provider.force_flush()

@@ -2,13 +2,13 @@
 
 ## Project Overview
 
-Docker Compose setup for running Ollama locally with optional Open WebUI interface.
+Docker Compose setup for running Ollama locally with Open WebUI interface.
 
 ## Structure
 
 - `docker-compose.yml` - Service definitions for Ollama and Open WebUI
 - `Dockerfile` - Custom Ollama image that pre-pulls llama3.2
-- `.env` - Profile configuration (ollama-only or ollama-only,webui)
+- `.env` - Environment configuration
 - `examples/openai-example.py` - Basic Python client using OpenAI SDK
 - `examples/openai-with-otel-example.py` - Python client with OpenTelemetry instrumentation
 
