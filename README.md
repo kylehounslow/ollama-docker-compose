@@ -6,9 +6,9 @@ Run [Ollama](https://ollama.ai/) locally using Docker Compose with an optional [
 graph LR
     A[User] --> B[Open WebUI<br/>:8080]
     A --> C[Python Client]
-    B --> D[Ollama<br/>:11434]
+    B --> D[Ollama Server<br/>:11434]
     C --> D
-    D --> E[llama3.2]
+    D --> E[LLM<br/>llama3.2]
     C -.-> F[OTel Collector<br/>optional]
 ```
 
