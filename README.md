@@ -9,7 +9,7 @@ graph LR
     B --> D[Ollama Server<br/>:11434]
     C --> D
     D --> E["LLM<br/>(llama3.2)"]
-    C -.-> F["OTel Collector<br/>(optional)"]
+    C -.-> F(["OTel Collector<br/>(optional)"])
 ```
 
 ## Quickstart
