@@ -13,6 +13,8 @@ graph LR
     C -.-> F
 ```
 
+![](./docs/webui-ollama.gif)
+
 ## Quickstart
 
 ```bash
